@@ -28,9 +28,11 @@ def print_header
 end
 def print(students)
     students.each.with_index(1) do |student, index|
-    puts "#{index}: #{student[:name]} (#{student[:cohort]} cohort), who
-    likes #{student[:hobbies]}, is from #{student[:country_of_birth]} and is
-    #{student[:height]} tall"
+      if /^[Bb].*/ === student[:name]
+        puts "#{index}: #{student[:name]} (#{student[:cohort]} cohort), who
+        likes #{student[:hobbies]}, is from #{student[:country_of_birth]} and is
+        #{student[:height]} tall"
+      end
   end
 end
 def print_footer(names)
