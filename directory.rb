@@ -27,12 +27,10 @@ def print_header
   puts "-------------"
 end
 def print(students)
-    students.each.with_index(1) do |student, index|
-      if student[:name].length < 12
-        puts "#{index}: #{student[:name]} (#{student[:cohort]} cohort), who
-        likes #{student[:hobbies]}, is from #{student[:country_of_birth]} and is
-        #{student[:height]} tall"
-      end
+  i = 0
+  while i < students.length
+        puts "#{students.index(students[i]) + 1}: #{students[i][:name]} (#{students[i][:cohort]} cohort), who likes #{students[i][:hobbies]}, is from #{students[i][:country_of_birth]} and is #{students[i][:height]} tall"
+        i += 1
   end
 end
 def print_footer(names)
