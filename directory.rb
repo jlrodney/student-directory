@@ -29,7 +29,10 @@ def input_students
 
     students << {name: name, cohort: cohort, hobbies: hobbies,
       country_of_birth: country_of_birth, height: height}
-    puts "Now we have #{students.count} students"
+    print "\nNow we have #{students.count} student\n"
+    unless students.length == 1
+      print "s"
+    end
     puts "Please enter another student name"
     puts "to finish hit return twice"
     name = gets.chomp
@@ -57,7 +60,10 @@ def printer(students)
   end
 end
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+  print "\nOverall, we have #{students.count} great student\n"
+  unless students.length == 1
+    print "s"
+  end
 end
 
 students = input_students
