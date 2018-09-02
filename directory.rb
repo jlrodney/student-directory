@@ -1,27 +1,35 @@
+@students = []
 def interactive_menu
-  students = []
   loop do
+    print_menu
+    process(gets.chomp)
+  end
+end
+
+def print_menu
     # 1. print the menu and ask the user what to do
     puts "1. Input the students"
     puts "2. Show the students"
     puts "9. Exit"
-    # 2. read the input and save it into a variable
-    selection = gets.chomp
-    # 3. do what the user has asked
-    case selection
+end
+def process(selection)
+  case selection
     when "1"
-      students = input_students
+      input_students
     when "2"
-      print_header
-      printer(students)
-      print_footer(students)
+      show_students
     when "9"
-      exit # this will cause the program to terminate
+      exit
     else
       puts "I don't know what you meant, try again"
-    end
   end
 end
+def show_students
+      print_header
+      print_students_list
+      print_footer
+end
+
 $months = [:january, :february, :march, :april, :may, :june, :july, :august, :september, :october, :november, :december]
 $width = 50
 def default_string(string)
@@ -34,7 +42,6 @@ end
 def input_students
   puts "Please enter student name"
   puts "to finish hit enter twice"
-  students = []
   name = gets.gsub(/\n/,"")
   while !name.empty? do
     puts "Enter cohort"
@@ -51,10 +58,10 @@ def input_students
     puts "Please enter height"
     height = default_string(height)
 
-    students << {name: name, cohort: cohort, hobbies: hobbies,
+    @students << {name: name, cohort: cohort, hobbies: hobbies,
       country_of_birth: country_of_birth, height: height}
-    print "\nNow we have #{students.count} student"
-    if students.length == 1
+    print "\nNow we have #{@students.count} student"
+    if @students.length == 1
       print "\n"
     else print "s\n"
     end
@@ -62,16 +69,15 @@ def input_students
     puts "to finish hit return twice"
     name = gets.gsub(/\n/,"")
   end
-  students
 end
 
 def print_header
   puts "The students of Villains Academy"
   puts "-------------"
 end
-def printer(students)
+def print_students_list
   $months.map do |month|
-    students.map do |student|
+    @students.map do |student|
       unless !student[:cohort].to_s.include? month.to_s
         i = 0
         puts "#{student[:name]}"
@@ -84,9 +90,9 @@ def printer(students)
     end
   end
 end
-def print_footer(students)
-  print "\nOverall, we have #{students.count} great student"
-  if students.length == 1
+def print_footer
+  print "\nOverall, we have #{@students.count} great student"
+  if @students.length == 1
     print "\n"
   else print "s\n"
   end
