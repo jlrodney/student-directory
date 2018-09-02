@@ -2,7 +2,7 @@
 def interactive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
@@ -48,7 +48,7 @@ end
 def input_students
   puts "Please enter student name"
   puts "to finish hit enter twice"
-  name = gets.gsub(/\n/,"")
+  name = STDIN.gets.gsub(/\n/,"")
   while !name.empty? do
     puts "Enter cohort"
     cohort = default_string(cohort).downcase.to_sym
@@ -73,7 +73,7 @@ def input_students
     end
     puts "Please enter another student name"
     puts "to finish hit return twice"
-    name = gets.gsub(/\n/,"")
+    name = STDIN.gets.gsub(/\n/,"")
   end
 end
 
@@ -113,7 +113,7 @@ def save_students
   end
   file.close
 end
-def load_students
+def load_students(filename = "students.csv")
   file = File.open("students.csv", "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
@@ -121,5 +121,16 @@ def load_students
   end
   file.close
 end
-
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(filename)
+    load_students(filename)
+    puts "loaded #{@students.count} from #{filename}"
+  else
+    puts "sorry #{filename} doesn't exist."
+    exit
+  end
+end
+try_load_students
 interactive_menu
