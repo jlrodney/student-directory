@@ -29,7 +29,13 @@ end
 def print(students)
   i = 0
   while i < students.length
-        puts "#{students.index(students[i]) + 1}: #{students[i][:name]} (#{students[i][:cohort]} cohort), who likes #{students[i][:hobbies]}, is from #{students[i][:country_of_birth]} and is #{students[i][:height]} tall"
+    width = 50
+      spacer = ' '
+      puts "#{students.index(students[i]) + 1}: #{students[i][:name]}"
+      puts " Who likes #{students[i][:hobbies]} ".center(width,spacer)
+      puts " Is from: #{students[i][:country_of_birth]} ".center(width,spacer)
+      puts " (Height: #{students[i][:height]} tall) ".center(width,spacer)
+      puts " (#{students[i][:cohort]} cohort) ".center(width,spacer)
         i += 1
   end
 end
