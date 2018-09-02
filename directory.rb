@@ -69,6 +69,10 @@ def print_footer(students)
 end
 
 students = input_students
+
+if students.length != 0
+
 print_header
 printer(students)
 print_footer(students)
+end
