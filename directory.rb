@@ -1,23 +1,38 @@
-student_count = 11
+def default_string(string)
+  string = gets.chomp
+  if string.empty?
+    string = "None provided"
+  end
+  return string
+end
+
 def input_students
-  puts "Please enter the names, then hobbies,then country of birst and then
-  height of the students"
-  puts "To finish, just hit return four times"
+  puts "Please enter student name"
+  puts "to finish hit enter twice"
   students = []
   name = gets.chomp
-  hobbies = gets.chomp
-  country_of_birth = gets.chomp
-  height = gets.chomp
-
-
   while !name.empty? do
-    students << {name: name, cohort: :november, hobbies: hobbies,
+    puts "Enter cohort"
+    months = [:january, :february, :march, :april, :may, :june, :july, :august, :september, :october, :november, :december]
+    cohort = default_string(cohort).downcase.to_sym
+    unless months.include? cohort
+      puts "Please try again"
+      puts "Enter cohort"
+      cohort = default_string(cohort).downcase.to_sym
+    end
+    puts "Please enter hobby"
+    hobbies = default_string(hobbies)
+    puts "Please enter country of birth"
+    country_of_birth = default_string(country_of_birth)
+    puts "Please enter height"
+    height = default_string(height)
+
+    students << {name: name, cohort: cohort, hobbies: hobbies,
       country_of_birth: country_of_birth, height: height }
     puts "Now we have #{students.count} students"
+    puts "Please enter another student name"
+    puts "to finish hit return twice"
     name = gets.chomp
-    hobbies = gets.chomp
-    country_of_birth = gets.chomp
-    height = gets.chomp
   end
   students
 end
