@@ -64,8 +64,7 @@ def input_students
     puts "Please enter height"
     height = default_string(height)
 
-    @students << {name: name, cohort: cohort, hobbies: hobbies,
-      country_of_birth: country_of_birth, height: height}
+    add_data(name, cohort, hobbies, country_of_birth, height)
     print "\nNow we have #{@students.count} student"
     if @students.length == 1
       print "\n"
@@ -107,7 +106,8 @@ end
 def save_students
   file = File.open("students.csv", "w")
   @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
+    student_data = [student[:name], student[:cohort], student[:hobbies],
+    student[:country_of_birth], student[:height]]
     csv_line = student_data.join(",")
     file.puts csv_line
   end
@@ -116,8 +116,8 @@ end
 def load_students(filename = "students.csv")
   file = File.open("students.csv", "r")
   file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
+    name, cohort, hobbies, country_of_birth, height = line.chomp.split(',')
+    add_data(name, cohort, hobbies, country_of_birth, height)
   end
   file.close
 end
@@ -131,6 +131,10 @@ def try_load_students
     puts "sorry #{filename} doesn't exist."
     exit
   end
+end
+def add_data(name, cohort, hobbies, country_of_birth, height)
+  @students << {name: name, cohort: cohort.to_sym, hobbies: hobbies,
+    country_of_birth: country_of_birth, height: height}
 end
 try_load_students
 interactive_menu
