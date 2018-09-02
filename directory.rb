@@ -1,7 +1,7 @@
 $months = [:january, :february, :march, :april, :may, :june, :july, :august, :september, :october, :november, :december]
 $width = 50
 def default_string(string)
-  string = gets.chomp
+  string = gets.gsub(/\n/,"")
   if string.empty?
     string = "None provided"
   end
@@ -11,7 +11,7 @@ def input_students
   puts "Please enter student name"
   puts "to finish hit enter twice"
   students = []
-  name = gets.chomp
+  name = gets.gsub(/\n/,"")
   while !name.empty? do
     puts "Enter cohort"
     cohort = default_string(cohort).downcase.to_sym
@@ -29,13 +29,14 @@ def input_students
 
     students << {name: name, cohort: cohort, hobbies: hobbies,
       country_of_birth: country_of_birth, height: height}
-    print "\nNow we have #{students.count} student\n"
-    unless students.length == 1
-      print "s"
+    print "\nNow we have #{students.count} student"
+    if students.length == 1
+      print "\n"
+    else print "s\n"
     end
     puts "Please enter another student name"
     puts "to finish hit return twice"
-    name = gets.chomp
+    name = gets.gsub(/\n/,"")
   end
   students
 end
@@ -60,9 +61,10 @@ def printer(students)
   end
 end
 def print_footer(students)
-  print "\nOverall, we have #{students.count} great student\n"
-  unless students.length == 1
-    print "s"
+  print "\nOverall, we have #{students.count} great student"
+  if students.length == 1
+    print "\n"
+  else print "s\n"
   end
 end
 
