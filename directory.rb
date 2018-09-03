@@ -1,4 +1,7 @@
 @students = []
+@months = [:january, :february, :march, :april, :may, :june, :july, :august, :september, :october, :november, :december]
+@width = 50
+
 def interactive_menu
   loop do
     print_menu
@@ -14,15 +17,20 @@ def print_menu
     puts "4. Load the list from students.csv"
     puts "9. Exit"
 end
+
 def process(selection)
   case selection
     when "1"
+      puts "You selected - Input students"
       input_students
     when "2"
+      puts "You selected - Show students"
       show_students
     when "3"
+      puts "You selected - Save the list of students"
       save_students
     when "4"
+      puts "You selected - Load the list from students.csv"
       load_students
     when "9"
       exit
@@ -36,8 +44,6 @@ def show_students
       print_footer
 end
 
-$months = [:january, :february, :march, :april, :may, :june, :july, :august, :september, :october, :november, :december]
-$width = 50
 def default_string(string)
   string = gets.gsub(/\n/,"")
   if string.empty?
@@ -52,7 +58,7 @@ def input_students
   while !name.empty? do
     puts "Enter cohort"
     cohort = default_string(cohort).downcase.to_sym
-    while !$months.include? cohort
+    while !@months.include? cohort
       puts "Please try again"
       puts "Enter cohort"
       cohort = default_string(cohort).downcase.to_sym
@@ -81,15 +87,15 @@ def print_header
   puts "-------------"
 end
 def print_students_list
-  $months.map do |month|
+  @months.map do |month|
     @students.map do |student|
       unless !student[:cohort].to_s.include? month.to_s
         i = 0
         puts "#{student[:name]}"
-        puts " Who likes #{student[:hobbies]} ".center($width)
-        puts " Is from: #{student[:country_of_birth]} ".center($width)
-        puts " Height: #{student[:height]} tall ".center($width)
-        puts " #{student[:cohort]} cohort ".center($width)
+        puts " Who likes #{student[:hobbies]} ".center(@width)
+        puts " Is from: #{student[:country_of_birth]} ".center(@width)
+        puts " Height: #{student[:height]} tall ".center(@width)
+        puts " #{student[:cohort]} cohort ".center(@width)
         i += 1
       end
     end
